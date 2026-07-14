@@ -2,24 +2,82 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>我的MC资源分享站</title>
+    <title>我的世界下载站</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: "Microsoft YaHei", sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #b3d9ff;
             min-height: 100vh;
-            margin: 0;
+            display: flex;
+        }
+
+        /* ===== 左侧边栏 ===== */
+        .sidebar {
+            width: 200px;
+            background: white;
+            padding: 20px 15px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar h2 {
+            font-size: 20px;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            flex: 1;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .sidebar ul li:hover {
+            background: #e3f0ff;
+        }
+        .sidebar ul li.active {
+            background: #2196F3;
+            color: white;
+        }
+        .sidebar .footer-text {
+            font-size: 14px;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        /* ===== 右侧主内容 ===== */
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         .box {
             background: white;
             padding: 30px 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             max-width: 500px;
-            width: 90%;
+            width: 100%;
+            min-height: 300px;
         }
         h1 {
             color: #333;
@@ -39,39 +97,24 @@
         .btn {
             display: block;
             padding: 16px 20px;
-            background: #4CAF50;
+            background: #2196F3;
             color: white;
             font-size: 20px;
             font-weight: bold;
             border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 5px 0 #2d6a30;
+            box-shadow: 0 5px 0 #0b5e9e;
             transition: 0.1s ease;
+            text-align: center;
         }
         .btn:hover {
-            background: #45a049;
+            background: #1e88e5;
             transform: translateY(2px);
-            box-shadow: 0 3px 0 #2d6a30;
+            box-shadow: 0 3px 0 #0b5e9e;
         }
         .btn:active {
             transform: translateY(5px);
-            box-shadow: 0 0px 0 #2d6a30;
-        }
-        .btn-blue {
-            background: #2196F3;
-            box-shadow: 0 5px 0 #0b5e9e;
-        }
-        .btn-blue:hover {
-            background: #1e88e5;
-            box-shadow: 0 3px 0 #0b5e9e;
-        }
-        .btn-orange {
-            background: #FF9800;
-            box-shadow: 0 5px 0 #b86d00;
-        }
-        .btn-orange:hover {
-            background: #f57c00;
-            box-shadow: 0 3px 0 #b86d00;
+            box-shadow: 0 0px 0 #0b5e9e;
         }
         .tip {
             color: #888;
@@ -86,40 +129,141 @@
             margin-top: 5px;
             color: #f44336;
         }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .about-text {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 700px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .sidebar ul {
+                display: flex;
+                gap: 20px;
+                flex: 1;
+                justify-content: center;
+            }
+            .sidebar ul li {
+                margin: 0;
+            }
+            .sidebar .footer-text {
+                border-top: none;
+                padding-top: 0;
+            }
+            .main {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>🎮 我的MC资源合集</h1>
-        <p class="sub">点击下面按钮直接下载或打开网盘</p>
-
-        <div class="btn-group">
-            <!-- 第一个：蓝奏云网盘（原链接） -->
-            <a href="https://ltcat.lanzouv.com/b0aj6gsid" target="_blank" class="btn">
-                📦 蓝奏云网盘（密码见弹窗）_电脑版pcl启动器
-            </a>
-
-            <!-- 第二个：安卓基岩版MC -->
-            <a href="https://get.downkuai.com/download/171814" class="btn btn-blue">
-                🧱 安卓基岩版 Minecraft
-            </a>
-
-            <!-- 第三个：安卓Java版启动器 FCL -->
-            <a href="https://miawa.cn/download/fcl/1.3.1.7/FCL-release-1.3.1.7-x86_64.apk" class="btn btn-orange">
-                ☕ 安卓Java版启动器 (FCL)
-            </a>
+    <!-- ===== 侧边栏 ===== -->
+    <div class="sidebar">
+        <div>
+            <h2>📂 导航</h2>
+            <ul>
+                <li class="active" data-page="home">🏠 首页</li>
+                <li data-page="resource">📦 资源</li>
+                <li data-page="about">💬 关于</li>
+            </ul>
         </div>
+        <div class="footer-text">xiaorendewangzhan</div>
+    </div>
 
-        <div class="tip">
-            💡 提示：点击会直接下载APK或跳转网页<br>
-            <small>⚠️ 下载安装前一定要请爸爸妈妈帮忙检查哦！</small>
+    <!-- ===== 主内容区（三个页面） ===== -->
+    <div class="main">
+        <div class="box">
+
+            <!-- 首页 -->
+            <div id="home" class="page active">
+                <h1>📥 我的世界下载站</h1>
+                <p class="sub">欢迎来到我的小站！🎉</p>
+                <p style="color: #555; font-size: 16px; line-height: 1.8;">
+                    这里收集了《我的世界》手机版的几种下载方式。<br>
+                    点击左侧“📦 资源”查看所有下载链接。
+                </p>
+                <div style="margin-top: 20px; background: #f0f7ff; padding: 15px; border-radius: 15px;">
+                    <span style="font-size: 14px; color: #2196F3;">💡 提示：点击“资源”页面就能看到下载按钮啦！</span>
+                </div>
+            </div>
+
+            <!-- 资源页（三个按钮） -->
+            <div id="resource" class="page">
+                <h1>📦 下载资源</h1>
+                <p class="sub">点击下方按钮直接跳转下载</p>
+                <div class="btn-group">
+                    <a href="https://ltcat.lanzouv.com/b0aj6gsid" target="_blank" class="btn">
+                        📦 蓝奏云网盘（密码见弹窗）
+                    </a>
+                    <a href="https://mcapks.com" target="_blank" class="btn">
+                        🧱 安卓基岩版 Minecraft
+                    </a>
+                    <a href="https://foldcraftlauncher.cn" target="_blank" class="btn">
+                        ☕ 安卓Java版启动器 (FCL)
+                    </a>
+                </div>
+                <div class="tip">
+                    💡 点击按钮会跳转到对应的下载网站<br>
+                    <small>⚠️ 下载安装前一定要请爸爸妈妈帮忙检查哦！</small>
+                </div>
+            </div>
+
+            <!-- ===== 关于页（标题已改成“小人的破站”） ===== -->
+            <div id="about" class="page">
+                <h1>💬 小人的破站</h1>   <!-- 这里改成了“小人的破站” -->
+                <div class="about-text">
+                    <p>这个小站是一个小学生制作的，专门分享《我的世界》手机版的下载资源。</p>
+                    <p>📌 所有链接均来自网络，仅供学习交流。</p>
+                    <p>👦 制作者：xiaorendewangzhan</p>
+                    <p style="margin-top: 15px; color: #999; font-size: 14px;">如果你也有好的资源，欢迎分享～</p>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // 页面打开时弹出密码提示
         alert("密码是pcl2");
+
+        // 侧边栏切换功能
+        const menuItems = document.querySelectorAll('.sidebar ul li');
+        const pages = {
+            home: document.getElementById('home'),
+            resource: document.getElementById('resource'),
+            about: document.getElementById('about')
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                Object.values(pages).forEach(p => p.classList.remove('active'));
+                const pageId = this.dataset.page;
+                if (pages[pageId]) {
+                    pages[pageId].classList.add('active');
+                }
+            });
+        });
     </script>
 
 </body>
